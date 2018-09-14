@@ -1,0 +1,22 @@
+<%= form_for @school do |f| %>
+  <div class="inputs">
+    <%= f.label :name %>
+    <%= f.text_field :name, autofocus: true, required: true %>
+    <br/>
+    <%= f.label :address %>
+    <%= f.text_field :address, required: true %>
+    <br/>
+    <%= f.label :principal %>
+    <%= f.text_field :principal, required: true %>
+    <br/>
+    <%= f.label :capacity %>
+    <%= f.number_field :capacity, required: true %>
+    <br/>
+    <%= f.label :private_school %>
+    <%= f.check_box :private_school,{}, true, false%>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
