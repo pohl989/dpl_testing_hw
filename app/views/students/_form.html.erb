@@ -1,19 +1,14 @@
-<%= form_for @school do |f| %>
+<%= form_for [@school, @student] do |f| %>
   <div class="inputs">
     <%= f.label :name %>
     <%= f.text_field :name, autofocus: true, required: true %>
     <br/>
-    <%= f.label :address %>
-    <%= f.text_field :address, required: true %>
+    <%= f.label :student_number %>
+    <%= f.number_field :student_number, required: true %>
     <br/>
-    <%= f.label :principal %>
-    <%= f.text_field :principal, required: true %>
-    <br/>
-    <%= f.label :capacity %>
-    <%= f.number_field :capacity, required: true %>
-    <br/>
-    <%= f.label :private_school %>
-    <%= f.check_box :private_school,{}, true, false%>
+    <%= f.label :gpa %>
+    <%= f.number_field :gpa, class: :text_field, step: :any%>
+    
   </div>
   <div class="actions">
     <%= f.submit %>
