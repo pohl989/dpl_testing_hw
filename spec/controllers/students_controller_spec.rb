@@ -59,25 +59,25 @@ RSpec.describe StudentsController, type: :controller do
       context "creates with valid params" do 
         it "creates a new student" do 
           expect {
-          post :create, params: { student: valid_attributes}
+          post :create, params: { student: valid_attributes, school_id: @school.id}
           }.to change(Student, :count).by(1)
         end
   
         it "redirects to the created student" do
-          post :create, params: { student: valid_attributes }
-          expect(response).to redirect_to(Student.last)
+          post :create, params: { student: valid_attributes, school_id: @school.id}
+          expect(response).to redirect_to(school_student_url(@school, Student.last))
         end
       end
 
       context 'creates with invalid params' do
         it 'creates a student' do
           expect {
-            post :create, params: { student: invalid_attributes }
+            post :create, params: { student: invalid_attributes, school_id: @school.id}
           }.to change(Student, :count).by(0)
         end
   
         it 'redirect back to form' do
-          post :create, params: { student: invalid_attributes }
+          post :create, params: { student: invalid_attributes, school_id: @school.id}
           expect(response).to be_successful
         end
       end
@@ -103,26 +103,26 @@ RSpec.describe StudentsController, type: :controller do
         }
   
         it "updates the student" do
-          put :update, params: { school_id: @student.school_id, student: {id: @student.id, gpa: 4.0 }}
+          put :update, params: { school_id: @student.school_id, id: @student.id, student: { gpa: 4.0 }}
           @student.reload
           expect(@student.gpa).to eq(new_attr[:gpa])
         end
   
         it "redirect to the student" do
-          put :update, params: { school_id: @student.school_id, student: {id: @student.id, gpa: 4.0 }}
+          put :update, params: { school_id: @student.school_id, id: @student.id, student: { gpa: 4.0 }}
           expect(response).to redirect_to(school_student_path(@student.school, @student))
         end
       end
   
       context "with invalid params" do
         it "does not update" do
-          put :update, params: { student: {id: @student.id, school_id: @student.school_id, student_number: 180023 }}
+          put :update, params: { school_id: @student.school_id, id: @student.id, student: { student_number: 180023 }}
           @student.reload
           expect(@student.student_number).to_not eq(invalid_attributes[:student_number])
         end
   
         it "render out the form" do 
-          put :update, params: { student: {id: @student.id, school_id: @student.school_id, student_number: 180023 }}
+          put :update, params: { school_id: @student.school_id, id: @student.id, student: { student_number: 180023 }}
           expect(response).to be_successful
         end
       end
