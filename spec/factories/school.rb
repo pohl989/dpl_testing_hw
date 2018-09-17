@@ -4,5 +4,6 @@ FactoryBot.define do
     address {'123 Elm Street'}
     principal { 'cool guy'}
     capacity {124}
-    private_school {false}
+    private_school {true}
   end
+end
